@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANA Youth Codeathon 2026 - FAQ & Interactive Guide</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#030712',
+                            card: '#0B1120',
+                            cyan: '#00F0FF',
+                            yellow: '#FFD700',
+                            gold: '#FFAA00',
+                            purple: '#A855F7',
+                            blue: '#2563EB',
+                            pink: '#EC4899',
+                            green: '#10B981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glow-yellow': '0 0 25px rgba(255, 215, 0, 0.3)',
+                        'glow-cyan': '0 0 25px rgba(0, 240, 255, 0.3)',
+                        'glow-purple': '0 0 25px rgba(168, 85, 247, 0.3)',
+                        'glow-card': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030712;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 215, 0, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(0, 240, 255, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.08) 0px, transparent 60%),
+                radial-gradient(at 50% 100%, rgba(255, 215, 0, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #F9FAFB;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(11, 17, 32, 0.95) 100%);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 35px -10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .timeline-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid rgba(255, 215, 0, 0.25);
+        }
+
+        .timeline-card:hover, .timeline-card.active-step {
+            border-color: #FFD700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 800px;
+            opacity: 1;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: #FFD700;
+        }
+
+        .faq-item.active {
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+        }
+
+        .timeline-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid rgba(255, 215, 0, 0.25);
+        }
+
+        .timeline-card:hover, .timeline-card.active-step {
+            border-color: #FFD700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 800px;
+            opacity: 1;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: #FFD700;
+        }
+
+        .faq-item.active {
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .logo-ring {
+            animation: spinSlow 30s linear infinite;
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        html {
+            scroll-behavior: auto; /* Handled manually by JS for motion blur dynamics */
+        }
+
+        /* Target section pulse glow animation on click navigation */
+        @keyframes targetPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.8);
+                border-color: rgba(255, 215, 0, 1);
+            }
+            40% {
+                box-shadow: 0 0 35px 8px rgba(255, 215, 0, 0.5);
+                border-color: rgba(255, 215, 0, 1);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
+        }
+
+        .section-highlight {
+            animation: targetPulse 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 1rem;
+        }
+
+        .speed-blur {
+            filter: url(#vertical-motion-blur);
+            will-change: filter;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-yellow selection:text-black">
+
+    <svg class="hidden" aria-hidden="true">
+        <defs>
+            <filter id="vertical-motion-blur">
+                <feGaussianBlur id="blur-node" stdDeviation="0, 0"></feGaussianBlur>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Canvas layers for ambient background -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Top Banner Navigation (UNTOUCHED BY MOTION BLUR) -->
+    <nav class="border-b border-white/10 bg-black/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="jumpToSection('top')">
+                <div class="relative w-12 h-12 flex items-center justify-center">
+                    <div class="absolute inset-0 rounded-full border-2 border-dashed border-brand-yellow/60 logo-ring"></div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue via-indigo-900 to-purple-900 border border-brand-yellow flex items-center justify-center font-black text-xs text-brand-yellow tracking-tighter shadow-glow-yellow">
+                        TANA
+                    </div>
+                </div>
+                <div>
+                    <div class="font-bold text-lg leading-tight tracking-wide text-white">
+                        TANA CODEATHON
+                    </div>
+                    <div class="text-xs text-brand-yellow font-mono">2026 FAQS & GUIDE</div>
+                </div>
+            </div>
+
+            <!-- Prominent Desktop Nav Buttons -->
+            <div class="hidden md:flex items-center space-x-2 text-xs font-semibold" id="desktop-nav-links">
+                <a href="#about" class="nav-link px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-brand-yellow/20 hover:border-brand-yellow/70 hover:text-brand-yellow text-gray-200 transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="about">
+                    <i class="fa-solid fa-gamepad text-brand-yellow"></i>
+                    <span>About</span>
+                </a>
+                <a href="#ai-studio" class="nav-link px-3.5 py-2 rounded-xl border border-brand-yellow/50 bg-brand-yellow/15 hover:bg-brand-yellow/25 hover:border-brand-yellow text-brand-yellow transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="ai-studio">
+                    <i class="fa-solid fa-wand-magic-sparkles text-brand-yellow animate-pulse"></i>
+                    <span>AI Studio</span>
+                </a>
+                <a href="#faq" class="nav-link px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-brand-yellow/20 hover:border-brand-yellow/70 hover:text-brand-yellow text-gray-200 transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="faq">
+                    <i class="fa-solid fa-circle-question text-brand-cyan"></i>
+                    <span>FAQ</span>
+                </a>
+                <a href="#rules" class="nav-link px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-brand-yellow/20 hover:border-brand-yellow/70 hover:text-brand-yellow text-gray-200 transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="rules">
+                    <i class="fa-solid fa-shield-halved text-brand-yellow"></i>
+                    <span>Rules</span>
+                </a>
+                <a href="#timeline" class="nav-link px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-brand-yellow/20 hover:border-brand-yellow/70 hover:text-brand-yellow text-gray-200 transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="timeline">
+                    <i class="fa-solid fa-timeline text-brand-purple"></i>
+                    <span>Timeline</span>
+                </a>
+                <a href="#rubric" class="nav-link px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-brand-yellow/20 hover:border-brand-yellow/70 hover:text-brand-yellow text-gray-200 transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="rubric">
+                    <i class="fa-solid fa-award text-brand-gold"></i>
+                    <span>Rubric</span>
+                </a>
+                <a href="#contact" class="nav-link px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-brand-yellow/20 hover:border-brand-yellow/70 hover:text-brand-yellow text-gray-200 transition-all duration-300 flex items-center space-x-1.5 shadow-sm hover:shadow-glow-yellow hover:scale-105" data-section="contact">
+                    <i class="fa-solid fa-headset text-green-400"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <a href="https://tinyurl.com/TANACODEATHON2026" target="_blank" rel="noopener noreferrer" 
+                   class="bg-gradient-to-r from-brand-yellow to-brand-gold text-black font-extrabold px-4 sm:px-5 py-2 rounded-full shadow-glow-yellow hover:scale-105 transition-all text-xs sm:text-sm flex items-center space-x-2">
+                    <span>Register Now</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+
+                <!-- SFX Toggle -->
+                <button id="sfx-toggle" class="p-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-brand-yellow/20 text-brand-yellow transition-all duration-300 flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 shadow-sm hover:scale-105" title="Toggle Sound Effects">
+                    <i id="sfx-icon" class="fa-solid fa-volume-high text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area (Motion blur applies exclusively to this container) -->
+    <div id="app-wrapper" class="relative z-20 flex flex-col min-h-screen speed-blur">
+
+        <header id="top" class="py-16 md:py-24 px-4 text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto relative z-10">
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-brand-yellow/30 bg-brand-yellow/10 text-brand-yellow text-xs font-mono mb-6 uppercase tracking-wider">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span>Telugu Association of North America</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                    TANA <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow via-yellow-300 to-amber-500 drop-shadow-[0_0_15px_rgba(255,215,0,0.3)]">CODEATHON</span> 2026
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                    Frequently Asked Questions & Event Guidelines for Middle & High School Game Developers, Parents, and Mentors.
+                </p>
+
+                <!-- Hero Interactive Quick Jump Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 text-xs md:text-sm font-semibold text-gray-200">
+                    <a href="#about" class="nav-link px-4 py-2.5 rounded-xl flex items-center space-x-2 bg-white/5 border border-white/20 hover:border-brand-yellow hover:bg-brand-yellow/15 hover:text-brand-yellow transition-all duration-300 hover:scale-105 hover:shadow-glow-yellow" data-section="about">
+                        <i class="fa-solid fa-gamepad text-brand-yellow"></i>
+                        <span>About Event</span>
+                    </a>
+                    <a href="#ai-studio" class="nav-link px-4 py-2.5 rounded-xl flex items-center space-x-2 bg-gradient-to-r from-brand-yellow/20 via-yellow-500/10 to-brand-purple/20 border border-brand-yellow/60 hover:border-brand-yellow hover:bg-brand-yellow/25 hover:text-brand-yellow transition-all duration-300 hover:scale-105 hover:shadow-glow-yellow" data-section="ai-studio">
+                        <i class="fa-solid fa-wand-magic-sparkles text-brand-yellow"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="#faq" class="nav-link px-4 py-2.5 rounded-xl flex items-center space-x-2 bg-white/5 border border-white/20 hover:border-brand-yellow hover:bg-brand-yellow/15 hover:text-brand-yellow transition-all duration-300 hover:scale-105 hover:shadow-glow-yellow" data-section="faq">
+                        <i class="fa-solid fa-magnifying-glass text-brand-cyan"></i>
+                        <span>Search FAQs</span>
+                    </a>
+                    <a href="#timeline" class="nav-link px-4 py-2.5 rounded-xl flex items-center space-x-2 bg-white/5 border border-white/20 hover:border-brand-yellow hover:bg-brand-yellow/15 hover:text-brand-yellow transition-all duration-300 hover:scale-105 hover:shadow-glow-yellow" data-section="timeline">
+                        <i class="fa-solid fa-calendar-days text-brand-purple"></i>
+                        <span>Interactive Timeline</span>
+                    </a>
+                    <a href="#rubric" class="nav-link px-4 py-2.5 rounded-xl flex items-center space-x-2 bg-white/5 border border-white/20 hover:border-brand-yellow hover:bg-brand-yellow/15 hover:text-brand-yellow transition-all duration-300 hover:scale-105 hover:shadow-glow-yellow" data-section="rubric">
+                        <i class="fa-solid fa-award text-brand-gold"></i>
+                        <span>Judging Rubric</span>
+                    </a>
+                    <a href="#contact" class="nav-link px-4 py-2.5 rounded-xl flex items-center space-x-2 bg-white/5 border border-white/20 hover:border-brand-yellow hover:bg-brand-yellow/15 hover:text-brand-yellow transition-all duration-300 hover:scale-105 hover:shadow-glow-yellow" data-section="contact">
+                        <i class="fa-solid fa-headset text-green-400"></i>
+                        <span>Support Line</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-5xl mx-auto px-4 md:px-6 flex-grow space-y-24 pb-20">
+
+            <!-- ABOUT SECTION -->
+            <section id="about" class="grid grid-cols-1 md:grid-cols-3 gap-6 scroll-mt-28">
+                <!-- About Card 1 -->
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center text-xl mb-4 border border-brand-yellow/30 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Build A Video Game</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Design and code a fully functional video game from scratch based on an official prompt revealed at kickoff on August 1st.
+                    </p>
+                </div>
+
+                <!-- About Card 2 -->
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-xl mb-4 border border-brand-cyan/30 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">100% Individual</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Compete independently in Middle School (&lt;14) or High School (14-18) divisions to showcase your personal coding skills and vision.
+                    </p>
+                </div>
+
+                <!-- About Card 3 -->
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-purple/10 text-brand-purple flex items-center justify-center text-xl mb-4 border border-brand-purple/30 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Browser Playable</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Use any tool or engine (Godot, Scratch, Unity, Python) as long as your final submission can be played in a web browser!
+                    </p>
+                </div>
+            </section>
+
+            <!-- AI ASSISTANT SECTION -->
+            <section id="ai-studio" class="scroll-mt-28">
+                <div class="glass-card p-6 md:p-8 rounded-3xl border border-brand-yellow/40 bg-gradient-to-br from-brand-card via-black to-slate-950 relative overflow-hidden shadow-glow-yellow">
+                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-brand-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-brand-purple/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-6 border-b border-white/10 gap-4">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-white">AI Student Assistant</h2>
+                            <p class="text-gray-300 text-sm mt-1">Ask questions and get instant guidance on TANA CodeAthon 2026 rules, tools, and guidelines.</p>
+                        </div>
+                    </div>
+
+                    <!-- AI MENTOR CHATBOT -->
+                    <div id="ai-tab-chat" class="space-y-4">
+                        <div class="bg-black/50 border border-white/10 rounded-2xl p-4 h-80 overflow-y-auto flex flex-col space-y-3" id="chat-messages">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-brand-yellow/20 border border-brand-yellow text-brand-yellow flex items-center justify-center text-xs font-bold shrink-0">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div class="bg-white/10 border border-white/10 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm text-gray-200 leading-relaxed max-w-xl">
+                                    Hello! I'm <strong>Codey</strong>, your TANA CodeAthon 2026 AI Assistant. Ask me anything about eligibility, deadlines, ESRB rules, allowed tools (Godot, Unity, Scratch, Python), or submission steps!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Prompt Pills -->
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            <span class="text-gray-400 font-mono self-center mr-1">Quick asks:</span>
+                            <button onclick="sendQuickPrompt('What game engines are allowed and what are the requirements?')" class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-yellow hover:text-brand-yellow transition text-gray-300">🎮 Allowed Engines</button>
+                            <button onclick="sendQuickPrompt('Explain the 70% originality rule and external asset crediting.')" class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-yellow hover:text-brand-yellow transition text-gray-300">🛡️ 70% Rule & Assets</button>
+                            <button onclick="sendQuickPrompt('What should I include in my 1-2 minute video pitch?')" class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-yellow hover:text-brand-yellow transition text-gray-300">📹 Pitch Video Guide</button>
+                            <button onclick="sendQuickPrompt('What is the ESRB E10+ content policy for games?')" class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-yellow hover:text-brand-yellow transition text-gray-300">🛑 ESRB E10+ Rules</button>
+                        </div>
+
+                        <!-- Chat Input Box -->
+                        <div class="flex items-center space-x-2 pt-2">
+                            <input type="text" id="chat-input" placeholder="Type your question about CodeAthon 2026..." 
+                                   onkeydown="if(event.key==='Enter') sendChatMessage()"
+                                   class="flex-1 bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-yellow">
+                            <button onclick="sendChatMessage()" id="chat-send-btn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-brand-yellow to-brand-gold text-black font-extrabold text-sm hover:scale-105 transition flex items-center space-x-2 shrink-0">
+                                <span>Send</span>
+                                <i class="fa-solid fa-paper-plane text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FAQ SECTION -->
+            <section id="faq" class="scroll-mt-28">
+                <div class="text-center mb-10">
+                    <span class="text-brand-yellow font-mono text-xs uppercase tracking-widest block mb-2">Got Questions?</span>
+                    <h2 class="text-4xl font-extrabold text-white">Frequently Asked Questions</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-brand-yellow to-brand-gold mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <!-- FAQ Search Bar -->
+                <div class="max-w-xl mx-auto mb-8 relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="faq-search" placeholder="Search questions (e.g. Scratch, Team, Deadline, ESRB, Contact)..." 
+                           class="w-full pl-11 pr-4 py-3 rounded-xl bg-black/50 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow text-sm font-sans transition">
+                </div>
+
+                <div class="space-y-4" id="faq-container">
+
+                    <!-- Q1 -->
+                    <div class="faq-item glass-card rounded-2xl border border-white/10 transition-all duration-350 ease-out group hover:border-brand-yellow/60">
+                        <button class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow flex items-center justify-center text-sm font-bold group-hover:scale-110 group-hover:bg-brand-yellow group-hover:text-black transition-all duration-300 ease-out shrink-0">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </div>
+                                <span class="text-lg font-semibold text-white flex items-center gap-2">
+                                    <span class="text-brand-yellow font-mono text-sm">01.</span>
+                                    What is TANA CodeAthon?
+                                </span>
+                            </div>
+                            <i class="faq-icon fa-solid fa-chevron-down text-gray-400 group-hover:text-brand-yellow group-hover:scale-110 transition-all duration-300 ease-out"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-6 pb-6 pt-2 text-gray-300 border-t border-white/5 space-y-3 leading-relaxed">
+                                <p>TANA CodeAthon is an online coding competition designed to inspire innovation and technical excellence in middle and high school students.</p>
+                                <ul class="list-disc list-inside space-y-1 text-gray-400 text-sm">
+                                    <li>Challenges students to build a functional video game from scratch based on a provided prompt.</li>
+                                    <li>Provides a platform to demonstrate unique coding logic, creative design, and storytelling abilities.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item glass-card rounded-2xl border border-white/10 transition-all duration-350 ease-out group hover:border-brand-yellow/60">
+                        <button class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow flex items-center justify-center text-sm font-bold group-hover:scale-110 group-hover:bg-brand-yellow group-hover:text-black transition-all duration-300 ease-out shrink-0">
+                                    <i class="fa-solid fa-user-graduate"></i>
+                                </div>
+                                <span class="text-lg font-semibold text-white flex items-center gap-2">
+                                    <span class="text-brand-yellow font-mono text-sm">02.</span>
+                                    Who is eligible to participate?
+                                </span>
+                            </div>
+                            <i class="faq-icon fa-solid fa-chevron-down text-gray-400 group-hover:text-brand-yellow group-hover:scale-110 transition-all duration-300 ease-out"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-6 pb-6 pt-2 text-gray-300 border-t border-white/5 space-y-4">
+                                <p>Eligibility is determined by the student's age as of <strong>August 1, 2026</strong> across two distinct divisions:</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                                        <div class="font-bold text-brand-yellow mb-1">Middle School Division</div>
+                                        <div class="text-sm text-gray-300">Under 14 years old</div>
+                                    </div>
+                                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                                        <div class="font-bold text-brand-cyan mb-1">High School Division</div>
+                                        <div class="text-sm text-gray-300">Ages 14 to 18 years old</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item glass-card rounded-2xl border border-white/10 transition-all duration-350 ease-out group hover:border-brand-yellow/60">
+                        <button class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow flex items-center justify-center text-sm font-bold group-hover:scale-110 group-hover:bg-brand-yellow group-hover:text-black transition-all duration-300 ease-out shrink-0">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <span class="text-lg font-semibold text-white flex items-center gap-2">
+                                    <span class="text-brand-yellow font-mono text-sm">03.</span>
+                                    Is this a team or individual competition?
+                                </span>
+                            </div>
+                            <i class="faq-icon fa-solid fa-chevron-down text-gray-400 group-hover:text-brand-yellow group-hover:scale-110 transition-all duration-300 ease-out"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-6 pb-6 pt-2 text-gray-300 border-t border-white/5 space-y-2">
+                                <p>This is a <strong>100% Individual & Online</strong> competition. Each participant develops their own unique vision and showcases their personal coding skills without team dependencies.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item glass-card rounded-2xl border border-white/10 transition-all duration-350 ease-out group hover:border-brand-yellow/60">
+                        <button class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow flex items-center justify-center text-sm font-bold group-hover:scale-110 group-hover:bg-brand-yellow group-hover:text-black transition-all duration-300 ease-out shrink-0">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <span class="text-lg font-semibold text-white flex items-center gap-2">
+                                    <span class="text-brand-yellow font-mono text-sm">04.</span>
+                                    What tools and engines are students allowed to use?
+                                </span>
+                            </div>
+                            <i class="faq-icon fa-solid fa-chevron-down text-gray-400 group-hover:text-brand-yellow group-hover:scale-110 transition-all duration-300 ease-out"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-6 pb-6 pt-2 text-gray-300 border-t border-white/5 space-y-3">
+                                <p><strong>Freedom of Choice:</strong> Students are encouraged to use whatever engines they are most comfortable with! Suggested choices include:</p>
+                                <div class="flex flex-wrap gap-2 pt-1">
+                                    <span class="px-3 py-1 bg-white/10 rounded-lg text-xs font-mono text-brand-yellow">Godot</span>
+                                    <span class="px-3 py-1 bg-white/10 rounded-lg text-xs font-mono text-brand-yellow">Scratch</span>
+                                    <span class="px-3 py-1 bg-white/10 rounded-lg text-xs font-mono text-brand-yellow">Unity</span>
+                                    <span class="px-3 py-1 bg-white/10 rounded-lg text-xs font-mono text-brand-yellow">Python / PyGame</span>
+                                    <span class="px-3 py-1 bg-white/10 rounded-lg text-xs font-mono text-brand-yellow">HTML5 / JS</span>
+                                </div>
+                                <p class="text-sm text-yellow-200/80 bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20 mt-2">
+                                    <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                                    <strong>Important Requirement:</strong> All games must be designed to run directly inside a standard web browser (must support web export).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="faq-item glass-card rounded-2xl border border-white/10 transition-all duration-350 ease-out group hover:border-brand-yellow/60">
+                        <button class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow flex items-center justify-center text-sm font-bold group-hover:scale-110 group-hover:bg-brand-yellow group-hover:text-black transition-all duration-300 ease-out shrink-0">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <span class="text-lg font-semibold text-white flex items-center gap-2">
+                                    <span class="text-brand-yellow font-mono text-sm">05.</span>
+                                    How do students submit their final work?
+                                </span>
+                            </div>
+                            <i class="faq-icon fa-solid fa-chevron-down text-gray-400 group-hover:text-brand-yellow group-hover:scale-110 transition-all duration-300 ease-out"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="px-6 pb-6 pt-2 text-gray-300 border-t border-white/5 space-y-3">
+                                <p>Submissions must be emailed to <a href="mailto:tanacodeathon2026@gmail.com" class="text-brand-yellow underline hover:text-amber-300">tanacodeathon2026@gmail.com</a> containing:</p>
+                                <ol class="list-decimal list-inside space-y-2 text-sm text-gray-300 bg-white/5 p-4 rounded-xl">
+                                    <li><strong>Participant ID & Title:</strong> Assigned Participant ID, Division, and official Game Title.</li>
+                                    <li><strong>Public Game URL:</strong> Web-hosted game link (Itch.io recommended, Scratch allowed, download-free).</li>
+                                    <li><strong>1-2 Min Demo Video Pitch:</strong> Video showcasing gameplay, visual design, audio, and unique mechanics.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- RULES SECTION -->
+            <section id="rules" class="scroll-mt-28">
+                <div class="text-center mb-10">
+                    <span class="text-brand-yellow font-mono text-xs uppercase tracking-widest block mb-2">Code of Conduct & Guidelines</span>
+                    <h2 class="text-4xl font-extrabold text-white">Competition Rules</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-brand-yellow to-brand-gold mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-2xl group">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center text-xl border border-green-500/30 group-hover:scale-110 transition-transform duration-300 ease-out">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">70% Core Originality</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                At least 70% of the game logic, code, art, and core content must be the student's original work created specifically for TANA CodeAthon 2026.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl group">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-xl border border-brand-cyan/30 group-hover:scale-110 transition-transform duration-300 ease-out">
+                                <i class="fa-solid fa-copyright"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">External & AI Attribution</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                Third-party royalty-free audio, open-source sprites, or AI-assisted content are permitted, provided they are explicitly credited in the submission email & game credits.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl md:col-span-2 group">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-xl bg-brand-purple/10 text-brand-purple flex items-center justify-center text-xl border border-brand-purple/30 group-hover:scale-110 transition-transform duration-300 ease-out shrink-0">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">ESRB E10+ Rating Standard</h3>
+                                    <p class="text-xs text-brand-purple font-mono">Family Friendly Content Policy</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                All submitted games must strictly adhere to an ESRB rating of <strong>E10+ or lower</strong>. Games containing inappropriate language, excessive violence, or offensive themes will be immediately disqualified.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMELINE SECTION -->
+            <section id="timeline" class="scroll-mt-28">
+                <div class="text-center mb-12">
+                    <span class="text-brand-yellow font-mono text-xs uppercase tracking-widest block mb-2">Interactive Schedule</span>
+                    <h2 class="text-4xl font-extrabold text-white">Event Timeline</h2>
+                    <p class="text-gray-400 text-xs font-mono mt-2">Click any stage to inspect details & action steps</p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-brand-yellow to-brand-gold mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="relative">
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gray-800">
+                        <div id="timeline-progress-bar" class="w-full bg-gradient-to-b from-brand-yellow via-brand-cyan to-brand-purple h-1/4 transition-all duration-500"></div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Step 1 -->
+                        <div class="relative flex flex-col md:flex-row items-center cursor-pointer timeline-step-node" data-step="1">
+                            <div class="flex-1 w-full md:w-1/2 md:pr-10 mb-4 md:mb-0">
+                                <div class="timeline-card glass-card p-6 rounded-2xl bg-black/50 active-step" id="step-card-1">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-xs font-mono text-brand-yellow font-bold uppercase tracking-wider">Stage 01</span>
+                                        <span class="px-2.5 py-1 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow text-xs font-mono">August 1</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Kickoff & Theme Reveal</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        Official competition kickoff! The secret game prompt/theme is unveiled alongside rubric announcements and a live Coding Kahoot! challenge.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-brand-yellow text-black font-black flex items-center justify-center border-4 border-black z-10 shadow-glow-yellow shrink-0">
+                                1
+                            </div>
+                            <div class="flex-1 w-full md:w-1/2 md:pl-10 hidden md:block"></div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative flex flex-col md:flex-row items-center cursor-pointer timeline-step-node" data-step="2">
+                            <div class="flex-1 w-full md:w-1/2 md:pr-10 hidden md:block"></div>
+                            <div class="w-10 h-10 rounded-full bg-brand-cyan text-black font-black flex items-center justify-center border-4 border-black z-10 shrink-0">
+                                2
+                            </div>
+                            <div class="flex-1 w-full md:w-1/2 md:pl-10 mt-4 md:mt-0">
+                                <div class="timeline-card glass-card p-6 rounded-2xl bg-black/50" id="step-card-2">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-xs font-mono text-brand-cyan font-bold uppercase tracking-wider">Stage 02</span>
+                                        <span class="px-2.5 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan text-xs font-mono">August 8</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Submission Deadline</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        Final submission deadline at <strong>11:59 PM EST</strong>. All game web URLs and 1-2 minute video pitches must be emailed to the team.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative flex flex-col md:flex-row items-center cursor-pointer timeline-step-node" data-step="3">
+                            <div class="flex-1 w-full md:w-1/2 md:pr-10 mb-4 md:mb-0">
+                                <div class="timeline-card glass-card p-6 rounded-2xl bg-black/50" id="step-card-3">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-xs font-mono text-brand-purple font-bold uppercase tracking-wider">Stage 03</span>
+                                        <span class="px-2.5 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/30 text-brand-purple text-xs font-mono">Aug 9 – 14</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Judging Period</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        Expert panel evaluates entries across both Middle and High School divisions using rubric criteria (Creativity, Code Quality, UX, Theme).
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-brand-purple text-black font-black flex items-center justify-center border-4 border-black z-10 shrink-0">
+                                3
+                            </div>
+                            <div class="flex-1 w-full md:w-1/2 md:pl-10 hidden md:block"></div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative flex flex-col md:flex-row items-center cursor-pointer timeline-step-node" data-step="4">
+                            <div class="flex-1 w-full md:w-1/2 md:pr-10 hidden md:block"></div>
+                            <div class="w-10 h-10 rounded-full bg-brand-gold text-black font-black flex items-center justify-center border-4 border-black z-10 shrink-0">
+                                4
+                            </div>
+                            <div class="flex-1 w-full md:w-1/2 md:pl-10 mt-4 md:mt-0">
+                                <div class="timeline-card glass-card p-6 rounded-2xl bg-black/50" id="step-card-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-xs font-mono text-brand-gold font-bold uppercase tracking-wider">Stage 04</span>
+                                        <span class="px-2.5 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-mono">August 15</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Grand Finale & Winners Ceremony</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        Grand Finale online ceremony announcing top award winners, cash prizes, certificates, and showcasing winning game entries!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- RUBRIC SECTION -->
+            <section id="rubric" class="scroll-mt-28">
+                <div class="text-center mb-10">
+                    <span class="text-brand-yellow font-mono text-xs uppercase tracking-widest block mb-2">Evaluation Criteria</span>
+                    <h2 class="text-4xl font-extrabold text-white">Judging Rubric</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-brand-yellow to-brand-gold mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-2xl group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-yellow/10 text-brand-yellow flex items-center justify-center text-lg mb-3 border border-brand-yellow/30 group-hover:scale-110 transition-transform duration-300 ease-out">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Creativity & Design</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Originality of game concept, visual aesthetics, narrative depth, and thematic innovation.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-lg mb-3 border border-brand-cyan/30 group-hover:scale-110 transition-transform duration-300 ease-out">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Code Quality</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Logic structure, bug-free execution, clean mechanics implementation, and performance stability.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl group">
+                        <div class="w-10 h-10 rounded-lg bg-brand-purple/10 text-brand-purple flex items-center justify-center text-lg mb-3 border border-brand-purple/30 group-hover:scale-110 transition-transform duration-300 ease-out">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">User Experience</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Intuitive controls, game feel, engaging level progression, sound effects, and overall replayability.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT & SUPPORT SECTION (PRESERVED WITH PHONE NUMBERS) -->
+            <section id="contact" class="scroll-mt-28">
+                <div class="text-center mb-10">
+                    <span class="text-green-400 font-mono text-xs uppercase tracking-widest block mb-2">We Are Here To Help You</span>
+                    <h2 class="text-4xl font-extrabold text-white">Support</h2>
+                    <p class="text-gray-300 text-sm max-w-2xl mx-auto mt-2">
+                        Yes, we are here to ensure your journey is successful! If you encounter any issues or have questions, reach out directly to our coordination team.
+                    </p>
+                    <div class="w-20 h-1 bg-gradient-to-r from-green-400 to-brand-cyan mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Phone Line 1 -->
+                    <div class="glass-card p-6 rounded-2xl border border-green-500/30 hover:border-green-400 transition-all text-center group">
+                        <div class="w-14 h-14 rounded-2xl bg-green-500/10 text-green-400 flex items-center justify-center text-2xl mx-auto mb-4 border border-green-500/30 group-hover:scale-110 transition-transform shadow-glow-cyan">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="text-xs font-mono text-green-400 uppercase tracking-wider mb-1">Support Line 1</div>
+                        <a href="tel:6107105203" class="text-2xl font-black text-white font-mono hover:text-green-400 transition-colors block">
+                            (610) 710-5203
+                        </a>
+                        <p class="text-xs text-gray-400 mt-2">Direct Phone / Text Support</p>
+                        <a href="tel:6107105203" class="mt-4 inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-green-500/20 text-green-300 border border-green-500/40 hover:bg-green-500/30 text-xs font-semibold transition">
+                            <i class="fa-solid fa-headset"></i>
+                            <span>Call Line 1</span>
+                        </a>
+                    </div>
+
+                    <!-- Phone Line 2 -->
+                    <div class="glass-card p-6 rounded-2xl border border-brand-cyan/30 hover:border-brand-cyan transition-all text-center group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-2xl mx-auto mb-4 border border-brand-cyan/30 group-hover:scale-110 transition-transform shadow-glow-cyan">
+                            <i class="fa-solid fa-phone-volume"></i>
+                        </div>
+                        <div class="text-xs font-mono text-brand-cyan uppercase tracking-wider mb-1">Support Line 2</div>
+                        <a href="tel:4842125212" class="text-2xl font-black text-white font-mono hover:text-brand-cyan transition-colors block">
+                            (484) 212-5212
+                        </a>
+                        <p class="text-xs text-gray-400 mt-2">Coordination Desk Line</p>
+                        <a href="tel:4842125212" class="mt-4 inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/40 hover:bg-brand-cyan/30 text-xs font-semibold transition">
+                            <i class="fa-solid fa-headset"></i>
+                            <span>Call Line 2</span>
+                        </a>
+                    </div>
+
+                    <!-- Phone Line 3 -->
+                    <div class="glass-card p-6 rounded-2xl border border-brand-purple/30 hover:border-brand-purple transition-all text-center group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center text-2xl mx-auto mb-4 border border-brand-purple/30 group-hover:scale-110 transition-transform shadow-glow-purple">
+                            <i class="fa-solid fa-phone-flip"></i>
+                        </div>
+                        <div class="text-xs font-mono text-brand-purple uppercase tracking-wider mb-1">Support Line 3</div>
+                        <a href="tel:6106204135" class="text-2xl font-black text-white font-mono hover:text-brand-purple transition-colors block">
+                            (610) 620-4135
+                        </a>
+                        <p class="text-xs text-gray-400 mt-2">Technical Assistance Line</p>
+                        <a href="tel:6106204135" class="mt-4 inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-brand-purple/20 text-brand-purple border border-brand-purple/40 hover:bg-brand-purple/30 text-xs font-semibold transition">
+                            <i class="fa-solid fa-headset"></i>
+                            <span>Call Line 3</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Email & Official Channel Card -->
+                <div class="glass-card p-8 rounded-2xl border border-brand-yellow/40 bg-gradient-to-r from-brand-yellow/10 via-brand-card to-black text-center relative overflow-hidden">
+                    <div class="max-w-2xl mx-auto space-y-4">
+                        <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-yellow/20 text-brand-yellow text-xs font-mono uppercase tracking-wider border border-brand-yellow/40">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>Official Communication Email</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black text-white">tanacodeathon2026@gmail.com</h3>
+                        <p class="text-gray-300 text-sm">
+                            For all game submissions, participant inquiry updates, and official announcements, reach out to our team via email.
+                        </p>
+                        <div class="pt-2 flex flex-wrap justify-center gap-4">
+                            <a href="mailto:tanacodeathon2026@gmail.com" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-yellow to-brand-gold text-black font-extrabold text-sm shadow-glow-yellow hover:scale-105 transition flex items-center space-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Send Official Email</span>
+                            </a>
+                            <a href="https://tinyurl.com/TANACODEATHON2026" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl border border-white/20 bg-white/5 hover:border-brand-yellow text-white text-sm font-semibold transition flex items-center space-x-2">
+                                <i class="fa-solid fa-qrcode text-brand-yellow"></i>
+                                <span>Registration Portal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-white/10 bg-black/80 py-10 text-center text-xs text-gray-500">
+            <div class="max-w-7xl mx-auto px-4 space-y-4">
+                <div class="flex justify-center items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-yellow/10 border border-brand-yellow flex items-center justify-center font-bold text-brand-yellow text-xs">
+                        TANA
+                    </div>
+                    <span class="text-white font-bold tracking-wider">TANA YOUTH CODEATHON 2026</span>
+                </div>
+                <p class="max-w-md mx-auto">Telugu Association of North America (Est. 1977). "Our Youth are Our Heritage".</p>
+                <div class="text-gray-600">
+                    &copy; 2026 TANA Youth Codeathon. All rights reserved.
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let sfxEnabled = true;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playClickSound() {
+            if (!sfxEnabled) return;
+            initAudio();
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08); // A5
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch (e) {}
+        }
+
+        function playJumpSound() {
+            if (!sfxEnabled) return;
+            initAudio();
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.25);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.25);
+            } catch (e) {}
+        }
+
+        // Toggle Audio SFX
+        const sfxBtn = document.getElementById('sfx-toggle');
+        const sfxIcon = document.getElementById('sfx-icon');
+        sfxBtn.addEventListener('click', () => {
+            sfxEnabled = !sfxEnabled;
+            if (sfxEnabled) {
+                sfxIcon.className = 'fa-solid fa-volume-high text-xs';
+                sfxBtn.classList.remove('opacity-50');
+                playClickSound();
+            } else {
+                sfxIcon.className = 'fa-solid fa-volume-xmark text-xs';
+                sfxBtn.classList.add('opacity-50');
+            }
+        });
+
+        let currentSectionId = 'top';
+
+        function highlightTargetSection(targetEl) {
+            targetEl.classList.remove('section-highlight');
+            void targetEl.offsetWidth; // trigger reflow
+            targetEl.classList.add('section-highlight');
+            setTimeout(() => {
+                targetEl.classList.remove('section-highlight');
+            }, 1500);
+        }
+
+        function jumpToSection(targetId) {
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+
+            const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - 90; // offset for sticky navbar
+            const startPosition = window.scrollY;
+            const distance = targetPosition - startPosition;
+            const absDistance = Math.abs(distance);
+
+            // If already at target section or distance is trivial (< 35px), DO NOT apply motion blur
+            if (currentSectionId === targetId || absDistance < 35) {
+                currentSectionId = targetId;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                highlightTargetSection(targetEl);
+                return;
+            }
+
+            // Target is a DIFFERENT section -> Trigger dynamic motion blur transition
+            currentSectionId = targetId;
+            playJumpSound();
+
+            const blurNode = document.getElementById('blur-node');
+            const duration = Math.min(750, Math.max(350, absDistance * 0.45));
+            const startTime = performance.now();
+
+            function animateScrollAndBlur(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function: Smooth cubic ease-out for natural deceleration
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+                const currentY = startPosition + distance * easedProgress;
+                window.scrollTo(0, currentY);
+
+                // Velocity curve for blur: peak early and smoothly ease out to zero
+                const blurIntensity = Math.sin(progress * Math.PI) * 14;
+
+                if (blurNode) {
+                    blurNode.setAttribute('stdDeviation', `0, ${blurIntensity.toFixed(2)}`);
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateScrollAndBlur);
+                } else {
+                    // Fully clear blur when arriving
+                    if (blurNode) {
+                        blurNode.setAttribute('stdDeviation', '0, 0');
+                    }
+                    highlightTargetSection(targetEl);
+                }
+            }
+
+            requestAnimationFrame(animateScrollAndBlur);
+        }
+
+        // Attach click handlers to all internal anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                if (targetId) {
+                    jumpToSection(targetId);
+                }
+            });
+        });
+
+        // FAQ Accordion Handlers
+        document.querySelectorAll('.faq-button').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                playClickSound();
+                const faqItem = this.closest('.faq-item');
+                const isActive = faqItem.classList.contains('active');
+
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Live FAQ Search Filter
+        const searchInput = document.getElementById('faq-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase().trim();
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        const bgCanvas = document.getElementById('bg-canvas');
+        if (bgCanvas) {
+            const ctx = bgCanvas.getContext('2d');
+            let width = bgCanvas.width = window.innerWidth;
+            let height = bgCanvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = bgCanvas.width = window.innerWidth;
+                height = bgCanvas.height = window.innerHeight;
+            });
+
+            const particles = Array.from({ length: 45 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2 + 0.5,
+                color: ['#FFD700', '#00F0FF', '#A855F7', '#10B981'][Math.floor(Math.random() * 4)],
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4
+            }));
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+                requestAnimationFrame(drawParticles);
+            }
+
+            window.onload = function () {
+            drawParticles();
+        }
+    }
+
+    const apiKey = "";
+
+    async function geminiFetchWithRetry(url, payload, maxRetries = 3) {
+        let delay = 1000;
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (response.ok) {
+                    return await response.json();
+                }
+                if (response.status === 429 || response.status >= 500) {
+                    if (i === maxRetries - 1) {
+                        const errData = await response.json().catch(() => ({}));
+                        throw new Error(errData.error?.message || `Server error (${response.status})`);
+                    }
+                } else {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.error?.message || `API error (${response.status})`);
+                }
+            } catch (err) {
+                if (i === maxRetries - 1) throw err;
+            }
+            await new Promise(res => setTimeout(res, delay));
+            delay *= 2;
+        }
+    }
+
+    const systemPromptChat = `You are "Codey", the friendly official AI Assistant for TANA Youth Codeathon 2026 organized by the Telugu Association of North America (Est. 1977).
+Key Information to share accurately:
+- Event: TANA Youth Codeathon 2026 (100% Online & Individual game dev competition).
+- Divisions: Middle School (Under 14) and High School (14 to 18 years old as of Aug 1, 2026).
+- Dates: Kickoff & Secret Prompt Reveal on August 1st; Submission Deadline August 8 at 11:59 PM EST; Judging Aug 9-14; Grand Finale August 15.
+- Registration Link: https://tinyurl.com/TANACODEATHON2026
+- Email: tanacodeathon2026@gmail.com
+- Phone Support: (610) 710-5203, (484) 212-5212, (610) 620-4135.
+- Requirements: 70% core originality required. External royalty-free assets and AI tools are allowed if credited.
+- ESRB Rating: Must strictly adhere to ESRB E10+ or lower (family-friendly, no extreme violence/profanity).
+- Submission requirements: Email with Participant ID, Division, Game Title, Public download-free web game URL (Itch.io recommended, Scratch allowed), and a 1-2 minute video pitch.
+Answer clearly, concisely, encouragingly, and succinctly with bullet points where helpful!`;
+
+    let chatHistory = [];
+
+    async function sendChatMessage() {
+        const inputEl = document.getElementById('chat-input');
+        const msg = inputEl.value.trim();
+        if (!msg) return;
+
+        inputEl.value = '';
+        appendChatMessage('user', msg);
+        playClickSound();
+
+        const sendBtn = document.getElementById('chat-send-btn');
+        sendBtn.disabled = true;
+        sendBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Thinking...</span>`;
+
+        chatHistory.push({ role: 'user', parts: [{ text: msg }] });
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const payload = {
+            contents: chatHistory,
+            systemInstruction: { parts: [{ text: systemPromptChat }] }
+        };
+
+        try {
+            const data = await geminiFetchWithRetry(apiUrl, payload);
+            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request. Please try again or contact support!";
+            chatHistory.push({ role: 'model', parts: [{ text: reply }] });
+            appendChatMessage('model', reply);
+        } catch (err) {
+            appendChatMessage('model', `⚠️ Error connecting to AI Assistant: ${err.message}. You can reach support directly at tanacodeathon2026@gmail.com or (610) 710-5203.`);
+        } finally {
+            sendBtn.disabled = false;
+            sendBtn.innerHTML = `<span>Send</span><i class="fa-solid fa-paper-plane text-xs"></i>`;
+        }
+    }
+
+    function sendQuickPrompt(promptText) {
+        document.getElementById('chat-input').value = promptText;
+        sendChatMessage();
+    }
+
+    function appendChatMessage(sender, text) {
+        const container = document.getElementById('chat-messages');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'flex items-start space-x-3 ' + (sender === 'user' ? 'justify-end' : '');
+
+        if (sender === 'user') {
+            msgDiv.innerHTML = `
+                <div class="bg-brand-yellow/20 border border-brand-yellow/40 p-3.5 rounded-2xl rounded-tr-none text-xs sm:text-sm text-gray-100 leading-relaxed max-w-xl">
+                    ${escapeHtml(text)}
+                </div>
+                <div class="w-8 h-8 rounded-full bg-brand-yellow text-black flex items-center justify-center text-xs font-bold shrink-0">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            `;
+        } else {
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-brand-yellow/20 border border-brand-yellow text-brand-yellow flex items-center justify-center text-xs font-bold shrink-0">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bg-white/10 border border-white/10 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm text-gray-200 leading-relaxed max-w-xl">
+                    ${formatMarkdown(text)}
+                </div>
+            `;
+        }
+
+        container.appendChild(msgDiv);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    }
+
+    function formatMarkdown(text) {
+        let formatted = escapeHtml(text)
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`([^`]+)`/g, '<code class="bg-black/40 px-1 py-0.5 rounded text-brand-yellow font-mono text-xs">$1</code>')
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n- /g, '<br>• ');
+        return formatted;
+    }
+
+    function copyToClipboard(btn, text) {
+        const input = document.createElement('textarea');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Copied!</span>`;
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }
+</script>
+</body>
+</html>
